@@ -3,12 +3,13 @@ package org.gprt.calculator;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import org.mockito.MockitoAnnotations;
 
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.Before;
-import org.junit.After;
-import org.junit.Ignore;
+import org.gprt.numsupplier.NumSupplier;
+import org.junit.*;
+
+import org.mockito.Mockito;
+
 
 public class CalculatorTest {
   private static Calculator calculator;
@@ -71,4 +72,12 @@ public class CalculatorTest {
       calculator.divideInt(1, 0);
   }
 
+  @Test
+  // Mockito init and test example
+  public void testSumIntFromSupplier() {
+    MockitoAnnotations.initMocks(this);
+    NumSupplier numSupplier  = Mockito.mock(NumSupplier.class);
+    Mockito.when(numSupplier.supplyInts(10)).thenReturn(new int[] {1, 0, 2, 0, 3, 0, 4, 0, 5, 0});
+    assertEquals(calculator.sumInts( numSupplier.supplyInts(10) ), 15 );
+  }
 }

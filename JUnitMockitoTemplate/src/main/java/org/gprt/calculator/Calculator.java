@@ -17,4 +17,11 @@ public class Calculator implements ICalculator {
     }
     return result;
   }
+
+  public int sumInts(int... ints) {
+    int result = 0;
+    for (int i = 0; i < ints.length; i++) result += ints[i];
+    return result;
+  }
 }
+

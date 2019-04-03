@@ -1,0 +1,22 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name = "webstudio.WebStudio" table = "WEBSTUDIO">
+
+        <meta attribute = "class-description">
+            This class contains the web-studio detail.
+        </meta>
+
+        <id name = "id" type = "int" column = "id">
+            <generator class="native"/>
+        </id>
+
+        <property name = "name" column = "name" type = "string"/>
+        <property name = "annualProfit" column = "annual_profit" type = "double"/>
+        <property name = "employeesNum" column = "employees_num" type = "int"/>
+
+    </class>
+</hibernate-mapping>

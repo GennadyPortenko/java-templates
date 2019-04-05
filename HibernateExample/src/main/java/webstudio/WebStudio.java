@@ -6,8 +6,12 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 
 @Data
-@Entity
+@Entity(name = "WEBSTUDIO")
 @Table(name = "WEBSTUDIO")
+
+@NoArgsConstructor         // для вызова метода Hibernate createQuery()
+@RequiredArgsConstructor
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class WebStudio {
     @Id

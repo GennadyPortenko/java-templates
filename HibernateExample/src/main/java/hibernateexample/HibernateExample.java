@@ -8,6 +8,7 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import webstudio.WebStudio;
 
+import java.util.List;
 import java.util.Properties;
 
 public class HibernateExample {
@@ -42,6 +43,8 @@ public class HibernateExample {
         Integer addedStudioId = he.addWebStudio("ProStudio", 5450030.5d, 10);
 
         System.out.println(addedStudioId);
+
+        he.listWebstudios();
     }
 
     public Integer addWebStudio(String name, double annualProfit, int employeesNum){
@@ -61,4 +64,22 @@ public class HibernateExample {
         }
         return webStudioID;
     }
+
+    public void listWebstudios( ){
+        Session session = factory.openSession();
+        Transaction tx = null;
+
+        try {
+            tx = session.beginTransaction();
+            List webstudios = session.createQuery("FROM WEBSTUDIO").list();
+            webstudios.forEach(System.out::println);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
 }

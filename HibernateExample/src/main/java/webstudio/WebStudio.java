@@ -30,5 +30,7 @@ public class WebStudio {
     @NonNull
     @Column(name="employees_num")
     int employeesNum;
+
+    public int getId() { return this.id; }  //  не обязательный
 }
 

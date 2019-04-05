@@ -42,9 +42,35 @@ public class HibernateExample {
 
         Integer addedStudioId = he.addWebStudio("ProStudio", 5450030.5d, 10);
 
-        System.out.println(addedStudioId);
+        System.out.println("ID of the added studio : " + addedStudioId);
 
-        he.listWebstudios();
+        WebStudio firstStudio = he.getWebstudioById(1);
+        System.out.println(firstStudio);
+
+        he.updateWebstudio(1, firstStudio.getName(),
+                            firstStudio.getAnnualProfit(),
+                            firstStudio.getEmployeesNum() + 1 );
+
+        System.out.println(he.getWebstudioById(1));
+
+        List webstudios= he.getWebstudios();
+        if (webstudios == null) {
+            throw new RuntimeException("Unable to read content of WEBSTUDIO table");
+        }
+        if (webstudios.isEmpty()) {
+            System.out.println("WEBSTUDIO table id empty");
+        } else {
+            System.out.println("Number of web-studios: " + webstudios.size());
+            System.out.println("Deleting the last web-studio...");
+            he.deleteWebstudio(((List<WebStudio>)webstudios).get(webstudios.size() - 1).getId());
+            webstudios= he.getWebstudios();
+            if (webstudios == null) {
+                throw new RuntimeException("Unable to read content of WEBSTUDIO table");
+            }
+            System.out.println("Number of web-studios: " + webstudios.size());
+        }
+
+
     }
 
     public Integer addWebStudio(String name, double annualProfit, int employeesNum){
@@ -65,14 +91,13 @@ public class HibernateExample {
         return webStudioID;
     }
 
-    public void listWebstudios( ){
+    public void deleteWebstudio(Integer webstudioId){
         Session session = factory.openSession();
         Transaction tx = null;
-
         try {
             tx = session.beginTransaction();
-            List webstudios = session.createQuery("FROM WEBSTUDIO").list();
-            webstudios.forEach(System.out::println);
+            WebStudio webstudio = (WebStudio) session.get(WebStudio.class, webstudioId);
+            session.delete(webstudio);
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
@@ -80,6 +105,59 @@ public class HibernateExample {
         } finally {
             session.close();
         }
+    }
+
+    public WebStudio getWebstudioById(Integer webstudioId){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        WebStudio webstudio = null;
+        try {
+            tx = session.beginTransaction();
+            webstudio = (WebStudio) session.get(WebStudio.class, webstudioId);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return webstudio;
+    }
+
+    public void updateWebstudio(Integer webstudioId, String name, double annualProfit, int empliyeesNum){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        try {
+            tx = session.beginTransaction();
+            WebStudio webstudio = (WebStudio) session.get(WebStudio.class, webstudioId);
+            webstudio.setName(name);
+            webstudio.setAnnualProfit(annualProfit);
+            webstudio.setEmployeesNum(empliyeesNum);
+            session.update(webstudio);
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+    }
+
+    public List getWebstudios( ){
+        Session session = factory.openSession();
+        Transaction tx = null;
+        List webstudios= null;
+        try {
+            tx = session.beginTransaction();
+            webstudios = session.createQuery("FROM WEBSTUDIO").list();
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx!=null) tx.rollback();
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return webstudios;
     }
 
 }

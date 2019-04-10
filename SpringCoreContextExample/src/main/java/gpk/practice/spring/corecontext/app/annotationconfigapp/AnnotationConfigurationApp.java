@@ -11,8 +11,13 @@ public class AnnotationConfigurationApp implements IApp {
                 "gpk.practice.spring.corecontext.dao",
                 "gpk.practice.spring.corecontext.connection");
 
-        SomeDAO dao = context.getBean(SomeDAO.class);
-        // System.out.println( "dao name : "+ dao.getName());
-        System.out.println(dao.getSingletonConnection().getName() + " : " +  dao.getSingletonConnection());
+        SomeDAO dao1 = context.getBean(SomeDAO.class);
+        SomeDAO dao2 = context.getBean(SomeDAO.class);
+
+        System.out.println("dao1 : " );
+        dao1.printConnections();
+
+        System.out.println("dao2 : " );
+        dao2.printConnections();
     }
 }

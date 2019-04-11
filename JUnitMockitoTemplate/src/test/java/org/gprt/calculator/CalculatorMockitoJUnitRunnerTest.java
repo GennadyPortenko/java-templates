@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.mockito.Mock;
@@ -26,6 +27,10 @@ public class CalculatorMockitoJUnitRunnerTest {
     /* @RunWith(MockitoJUnitRunner.class)  или  MockitoAnnotations.initMocks(this); */
     @Mock
     private NumSupplier numSupplier  = Mockito.mock(NumSupplier.class);
+
+    @Mock
+    private CalculatorInfo calculatorInfo;
+    @InjectMocks     // требует наличия @RunWith(MockitoJUnitRunner.class)
     private static Calculator calculator;
 
     @BeforeClass
@@ -34,7 +39,7 @@ public class CalculatorMockitoJUnitRunnerTest {
     }
 
     @Test
-    public void testSumIntFromSupplier() {
+    public void variousTestCases() {
         // с mock-объектом не происходило никаких взаимодействий ?
         Mockito.verifyZeroInteractions(numSupplier);
 
@@ -64,6 +69,10 @@ public class CalculatorMockitoJUnitRunnerTest {
         Mockito.verify(numSupplier).toIncrementedIntArray(argumentCaptor.capture());
         List<Integer> capturedArgument = argumentCaptor.<List<Integer>> getValue();
         assertThat(capturedArgument, hasItem(1));
+
+        // Пример с @InjectMocks
+        Mockito.when(calculatorInfo.getId()).thenReturn(20);
+        assertEquals(calculator.getInfo().getId(), 20);
 
         // проверка на отсутствие дальнейшего взаимодествия mock-объекта
         Mockito.verifyNoMoreInteractions(numSupplier);

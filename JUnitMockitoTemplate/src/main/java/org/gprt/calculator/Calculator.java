@@ -1,6 +1,10 @@
 package org.gprt.calculator;
 
 public class Calculator implements ICalculator {
+  private CalculatorInfo info;
+  public CalculatorInfo getInfo() {
+    return info;
+  }
   @Override
   public int sumInt (int n1, int n2) {
     return n1 + n2;

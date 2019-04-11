@@ -9,7 +9,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
 @Component
-@PropertySource("classpath:annotconfig.properties")
+@PropertySource("classpath:app.properties")
 public class SomeDAO {
     @Autowired
     @Getter

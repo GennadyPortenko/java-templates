@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(value = ConfigurableBeanFactory.SCOPE_PROTOTYPE, proxyMode = ScopedProxyMode.TARGET_CLASS)
-@PropertySource("classpath:annotconfig.properties")
+@PropertySource("classpath:app.properties")
 public class ProxyPrototypeConnection {
     @Getter
     @Value("${connection.prototype.name}")

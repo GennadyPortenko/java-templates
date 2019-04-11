@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-@PropertySource("classpath:annotconfig.properties")
+@PropertySource("classpath:app.properties")
 public class PrototypeConnection {
     @Getter
     @Value("${connection.prototype.name}")

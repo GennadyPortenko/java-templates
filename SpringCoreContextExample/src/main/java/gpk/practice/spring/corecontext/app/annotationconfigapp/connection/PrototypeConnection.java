@@ -1,4 +1,4 @@
-package gpk.practice.spring.corecontext.connection;
+package gpk.practice.spring.corecontext.app.annotationconfigapp.connection;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

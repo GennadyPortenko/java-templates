@@ -1,8 +1,8 @@
-package gpk.practice.spring.corecontext.dao;
+package gpk.practice.spring.corecontext.app.annotationconfigapp.dao;
 
-import gpk.practice.spring.corecontext.connection.PrototypeConnection;
-import gpk.practice.spring.corecontext.connection.ProxyPrototypeConnection;
-import gpk.practice.spring.corecontext.connection.SingletonConnection;
+import gpk.practice.spring.corecontext.app.annotationconfigapp.connection.PrototypeConnection;
+import gpk.practice.spring.corecontext.app.annotationconfigapp.connection.ProxyPrototypeConnection;
+import gpk.practice.spring.corecontext.app.annotationconfigapp.connection.SingletonConnection;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;

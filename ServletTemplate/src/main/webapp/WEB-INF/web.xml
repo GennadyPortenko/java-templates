@@ -5,6 +5,11 @@
 
     <display-name>Servlet Template</display-name>
 
+    <welcome-file-list>
+        <welcome-file>hello.jsp</welcome-file>
+        <welcome-file>hello</welcome-file>
+    </welcome-file-list>
+
     <!-- Tomcat 6 and earlier mapping
     <servlet>
         <servlet-name>helloServlet</servlet-name>

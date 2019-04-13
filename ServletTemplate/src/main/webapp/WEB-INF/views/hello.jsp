@@ -12,5 +12,10 @@
       <input type="text" name="age"/>
       <input type="submit">
     </form>
+    <form action="/servlet-template/validation" method="post">
+      <p> login : <input type="text" name="login"/> </p>
+      <p> password : <input type="text" name="password"> </p>
+      <p> <input type="submit"  </p>
+    </form>
   </body>
 </html>

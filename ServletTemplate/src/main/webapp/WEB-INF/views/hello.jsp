@@ -6,6 +6,6 @@
     <title>Hello from JSP</title>
   </head>
   <body>
-    Hello from JSP! Привет!
+    Hello from JSP! Привет, ${name}.
   </body>
 </html>

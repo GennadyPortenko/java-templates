@@ -7,5 +7,10 @@
   </head>
   <body>
     Hello from JSP! Привет, ${name}.
+    <form action="/servlet-template/age" method="post">
+      Enter your age :
+      <input type="text" name="age"/>
+      <input type="submit">
+    </form>
   </body>
 </html>

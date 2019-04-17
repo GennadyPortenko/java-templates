@@ -74,10 +74,10 @@ public class HibernateExample {
     }
 
     public Integer addWebStudio(String name, double annualProfit, int employeesNum){
-
+        Session session = factory.openSession();
         Transaction tx = null;
         Integer webStudioID = null;
-        try (Session session = factory.openSession()){
+        try {
             tx = session.beginTransaction();
             WebStudio webStudio = new WebStudio(name, annualProfit, employeesNum);
             webStudioID = (Integer) session.save(webStudio);
@@ -85,13 +85,16 @@ public class HibernateExample {
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
         return webStudioID;
     }
 
     public void deleteWebstudio(Integer webstudioId){
+        Session session = factory.openSession();
         Transaction tx = null;
-        try (Session session = factory.openSession()){
+        try {
             tx = session.beginTransaction();
             WebStudio webstudio = (WebStudio) session.get(WebStudio.class, webstudioId);
             session.delete(webstudio);
@@ -99,26 +102,32 @@ public class HibernateExample {
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
 
     public WebStudio getWebstudioById(Integer webstudioId){
+        Session session = factory.openSession();
         Transaction tx = null;
         WebStudio webstudio = null;
-        try (Session session = factory.openSession()){
+        try {
             tx = session.beginTransaction();
             webstudio = (WebStudio) session.get(WebStudio.class, webstudioId);
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
         return webstudio;
     }
 
     public void updateWebstudio(Integer webstudioId, String name, double annualProfit, int empliyeesNum){
+        Session session = factory.openSession();
         Transaction tx = null;
-        try (Session session = factory.openSession()){
+        try {
             tx = session.beginTransaction();
             WebStudio webstudio = (WebStudio) session.get(WebStudio.class, webstudioId);
             webstudio.setName(name);
@@ -129,19 +138,24 @@ public class HibernateExample {
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
     }
 
     public List getWebstudios( ){
+        Session session = factory.openSession();
         Transaction tx = null;
         List webstudios= null;
-        try (Session session = factory.openSession()){
+        try {
             tx = session.beginTransaction();
             webstudios = session.createQuery("FROM WEBSTUDIO").list();
             tx.commit();
         } catch (HibernateException e) {
             if (tx!=null) tx.rollback();
             e.printStackTrace();
+        } finally {
+            session.close();
         }
         return webstudios;
     }

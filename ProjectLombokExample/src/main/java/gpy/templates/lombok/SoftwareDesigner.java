@@ -5,7 +5,7 @@ import lombok.experimental.FieldDefaults;
 
 import javax.persistence.Entity;
 
-@RequiredArgsConstructor          // создает конструктор с @NonNull и final полями
+@RequiredArgsConstructor          // создает конструктор для @NonNull и НЕинициализированных final полей
 // @RequiredArgsConstructor(staticName = "of") // создает статический конструктор
 @NoArgsConstructor(force = true)  // создает конструктор по умолчанию (без аргументов)
                                   // если есть @NonNull поля, то без force = true не скомпилируется
